@@ -8,25 +8,34 @@ var MessageCollection = require('../models/message').MessageCollection;
 var TemplateComponent = require('./template.jsx').TemplateComponent;
 
 var ChatForm = React.createClass({
+  mixins: [Backbone.React.Component.mixin],
   getInitialState: function(){
     return {
-      content: ''
+      content: '',
+      username: ''
     };
   },
-  handleTitle: function(e) {
+  handleChatContent: function(e) {
     var content = e.target.value;
     this.setState({content: content});
   },
   handleSubmit: function(e){
     e.preventDefault();
 
-    this.getCollection().create({content: this.state.content});
+    var data = {
+      content: this.state.content,
+      time: new Date().getTime(),
+      username: this.state.username
+    };
+
+    this.getCollection().create(data);
     this.setState({content: ''});
   },
   render: function() {
+    console.log(this.props.username);
     return (
       <form onSubmit={this.handleSubmit}>
-        <input onChange={this.handleTitle} name="chat" value={this.state.content} placeholder="Your Message Here" />
+        <input onChange={this.handleChatContent} name="chat" value={this.state.content} placeholder="Your Message Here" />
         <button type="submit" className="btn btn-success">Chat</button>
       </form>
     );
@@ -38,7 +47,7 @@ var ChatListing = React.createClass({
   render: function(){
     var collection = this.getCollection();
     var listofMessages = collection.map(function(message){
-       return <li key={message.get('_id') || todo.cid}>{message.get('content')} {message.get('username')} {message.get('time')}</li>;
+       return <li key={message.get('_id') || message.cid}>{message.get('content')} {message.get('username')} {message.get('time')}</li>;
     });
     return (
       <ul>
