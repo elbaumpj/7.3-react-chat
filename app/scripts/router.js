@@ -6,8 +6,8 @@ var ReactDOM = require('react-dom');
 
 //Local imports
 var AppComponent = require('./components/index.jsx').AppComponent;
-// var MessageCollection = require('./models/message').MessageCollection;
-// var ChatCollection = require('./components/chatscreen.jsx').ChatCollection;
+var MessageCollection = require('./models/message').MessageCollection;
+var ChatComponent = require('./components/chatscreen.jsx').ChatComponent;
 
 
 
@@ -21,7 +21,7 @@ var AppRouter = Backbone.Router.extend({
   },
   index: function() {
     ReactDOM.render(
-      React.createElement(AppComponent),
+      React.createElement(AppComponent, {router: this}),
       document.getElementById('app')
     );
   },
@@ -30,7 +30,7 @@ var AppRouter = Backbone.Router.extend({
     collection.fetch();
 
     ReactDOM.render(
-      React.createElement(ChatCollection, {collection: collection, username: this.username}),
+      React.createElement(ChatComponent, {collection: collection, username: this.username}),
       document.getElementById('app')
     );
   }

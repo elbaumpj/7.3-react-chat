@@ -35,11 +35,16 @@ var ChatForm = React.createClass({
 
 var ChatListing = React.createClass({
   mixins: [Backbone.React.Component.mixin],
-  render: funciont(){
+  render: function(){
     var collection = this.getCollection();
-    var listofMessages = collection.map(function(){
-       return <li key={todo.get('_id') || todo.cid}>{todo.get('content')}</li>;
+    var listofMessages = collection.map(function(message){
+       return <li key={message.get('_id') || todo.cid}>{message.get('content')} {message.get('username')} {message.get('time')}</li>;
     });
+    return (
+      <ul>
+        {listofMessages}
+      </ul>
+    );
   }
 });
 
@@ -48,8 +53,8 @@ var ChatComponent = React.createClass({
   render: function(){
     return (
       <TemplateComponent>
-        <ChatForm />
         <ChatListing />
+        <ChatForm />
       </TemplateComponent>
     );
   }
