@@ -2,16 +2,14 @@
 var React = require('react');
 
 //Local imports
-var ChatForm = require('./form.jsx').ChatForm;
+// var LoginComponent = require('./loginform.jsx').LoginComponent;
 
 
 var AppComponent = React.createClass({
   render: function() {
     return (
-      <div>
-        <ChatForm />
-      </div>
-    );
+      
+    )
   }
 });
 
