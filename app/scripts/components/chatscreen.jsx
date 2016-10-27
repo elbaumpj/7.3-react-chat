@@ -12,7 +12,6 @@ var ChatForm = React.createClass({
   getInitialState: function(){
     return {
       content: '',
-      username: ''
     };
   },
   handleChatContent: function(e) {
@@ -25,14 +24,14 @@ var ChatForm = React.createClass({
     var data = {
       content: this.state.content,
       time: new Date().getTime(),
-      username: this.state.username
+      username: this.props.username 
     };
 
     this.getCollection().create(data);
     this.setState({content: ''});
   },
   render: function() {
-    console.log(this.props.username);
+
     return (
       <form onSubmit={this.handleSubmit}>
         <input onChange={this.handleChatContent} name="chat" value={this.state.content} placeholder="Your Message Here" />
@@ -63,7 +62,7 @@ var ChatComponent = React.createClass({
     return (
       <TemplateComponent>
         <ChatListing />
-        <ChatForm />
+        <ChatForm username={this.props.username}/>
       </TemplateComponent>
     );
   }
