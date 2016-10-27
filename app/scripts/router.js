@@ -27,7 +27,10 @@ var AppRouter = Backbone.Router.extend({
   },
   chat: function() {
     var collection = new MessageCollection();
-    collection.fetch();
+    setInterval(function(){
+      collection.fetch();
+      console.log('fetching every 4 seconds');
+    }, 4000);
 
     ReactDOM.render(
       React.createElement(ChatComponent, {collection: collection, username: this.username}),
