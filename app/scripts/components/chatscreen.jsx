@@ -63,8 +63,8 @@ var ChatComponent = React.createClass({
   render: function(){
     return (
       <TemplateComponent>
-        <ChatListing />
         <ChatForm username={this.props.username}/>
+        <ChatListing />
       </TemplateComponent>
     );
   }
