@@ -49,6 +49,7 @@ var ChatListing = React.createClass({
     // var time = moment(message.get('time')).format('MMMM Do, YYYY HH:mm');
     var listofMessages = collection.map(function(message){
        return <li className="well" key={message.get('_id') || message.cid}>{message.get('content')} | {message.get('username')} | {moment(message.get('time')).format('MMMM Do, YYYY HH:mm')}</li>;
+          //Johnnie's suggestion with moment.js
     });
     return (
       <ul>
